@@ -214,7 +214,7 @@ ${CUSTOM}"
     esac
 
     print1 "${LEADING}${OUT}" | column -t -s':'
-    if [ -n "${WANT_FOOTER}" -a -n "${FOOTER}" ]
+    if [ "${WANT_FOOTER}" = 'yes' -a -n "${FOOTER}" ]
     then
         print1 "${FOOTER}\n"
     fi
