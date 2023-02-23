@@ -141,7 +141,7 @@ windows:toggle_maximized:kitty_mod+f10
         IFS=' '
         for B in $BINDINGS
         do
-            if print1 "${DEFAULTS}" | grep -q "${B}"
+            if print1 "${DEFAULTS}" | grep -qF "${B}"
             then
                 DEFAULTS=$(print1 "${DEFAULTS}" | sed "/${B}/d")
             fi
