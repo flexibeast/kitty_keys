@@ -24,7 +24,7 @@ kitty_keys () {
     # Leading and trailing to use in output.
     # As the output is processed with column(1) using ':' as
     # the delimiter, these variables must contain a ':'. 
-    LEADING=${KITTY_KEYS_LEADING:-"\n:\n"}
+    LEADING=${KITTY_KEYS_LEADING:-":\n"}
     TRAILING=${KITTY_KEYS_TRAILING:-":\n"}
 
     # Maximum column width of action field, after which
@@ -213,14 +213,24 @@ ${CUSTOM}"
             ;;
     esac
 
-    print1 "${LEADING}${OUT}" | column -t -s':'
+
+    WIDTH=$(print1 "${OUT}" | \
+                cut -d':' -f1 | \
+                awk '{ if (length>n) \
+                          { n=length; l=$0 } \
+                     } \
+                     END { print l }' | \
+                wc -m)
+    print1 "${LEADING}${OUT}" | \
+        awk -F':' "{ printf \"%-${WIDTH}s  %s\n\",\$1,\$2 }"
     if [ "${WANT_FOOTER}" = 'yes' -a -n "${FOOTER}" ]
     then
         print1 "${FOOTER}\n"
     fi
     if [ -n "${TRAILING}" ]
     then
-        print1 "${TRAILING}" | column -t -s':'
+        print1 "${TRAILING}" | \
+            awk -F':' "{ printf \"%-${WIDTH}s  %s\n\",\$1,\$2 }"
     fi
 
     # Remove convenience function from environment.

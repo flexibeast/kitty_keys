@@ -27,6 +27,4 @@ This function has been lightly tested in the zsh, bash and dash shells. Any non-
 
 * `echo` is notoriously inconsistent across platforms and shells, so `printf(1)` is used instead in an attempt to reduce issues. Calling it via `env` ensures we get the command/utility, rather than the builtin. The `print1` function provides a convenience wrapper.
 
-* `column(1)` is not part of POSIX, but was introduced in 4.3BSD-Reno (July 1990), and is assumed to be widely available.
-
 * Setting `IFS` to `''` is used to try to make field splitting behaviour more uniform across shells.
