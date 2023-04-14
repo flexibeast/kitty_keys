@@ -1,4 +1,5 @@
 # kitty_keys.sh
+## NOTE: This repository is now read-only - official repository now at https://git.sr.ht/~flexibeast/kitty_keys
 
 A POSIX function to print the current keybindings for [the `kitty` terminal emulator](https://sw.kovidgoyal.net/kitty/).
 
